@@ -1,0 +1,105 @@
+.main-banner {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.banner-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit:fill; /* Muestra la imagen completa */
+  max-height: 450px; /* Ajusta según tus necesidades */
+  z-index: 10;
+  }
+
+
+.banner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+/* Estilos para el carrusel de promociones */
+.promotion-slider {
+  width: 100%;
+}
+
+.promotion-slider .slick-slide {
+  padding: 0 5px;
+}
+
+.promotion-slider .slick-list {
+  margin: 0 -5px;
+}
+
+.promotion-slider .slick-dots {
+  bottom: -35px;
+}
+
+.promotion-slider .slick-dots li button:before {
+  font-size: 10px;
+  color: #65a30d;
+}
+
+.promotion-slider .slick-dots li.slick-active button:before {
+  color: #4d7c0f;
+}
+
+.promotion-slider .slick-prev,
+.promotion-slider .slick-next {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.promotion-slider .slick-prev:before,
+.promotion-slider .slick-next:before {
+  color: #4f800a;
+  font-size: 20px;
+  opacity: 1;
+}
+
+.promotion-slider .slick-prev {
+  left: -15px;
+}
+
+.promotion-slider .slick-next {
+  right: -15px;
+}
+
+@media (max-width: 640px) {
+  .promotion-slider .slick-prev {
+    left: 5px;
+  }
+  
+  .promotion-slider .slick-next {
+    right: 5px;
+  }
+  
+  .promotion-slider .slick-slide {
+    padding: 0 2px;
+  }
+}
+
+.icons {
+  color: #D29A89;
+}
+
+.header{
+  background-color: #e6ecd79c;
+  /* background-color: #dee9c24d; */
+}
+ .profile {
+  background-color: #eccbc142;
+  
+ }
