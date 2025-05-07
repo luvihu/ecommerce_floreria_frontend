@@ -49,7 +49,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, promotionData }) => 
               </>
             ) : (
               <span className="text-xl font-bold text-orange-800 ml-3">
-                S/{parseFloat(product.precio).toFixed(2)}
+                 S/{typeof product.precio === 'string' ? parseFloat(product.precio).toFixed(2) : product.precio.toFixed(2)}
               </span>
             )}
           </div>
