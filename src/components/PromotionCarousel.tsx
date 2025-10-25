@@ -60,7 +60,7 @@ const PromotionCarousel: React.FC<PromotionCarouselProps> = ({ products, promoti
   };
 
   return (
-    <div className="promotion-section py-12 bg-rose-50/60 w-full" id="ofertas">
+    <div className="promotion-section py-12 bg-rose-50/60 rounded-lg w-full" id="ofertas">
       <div className="container mx-auto px-3">
         <h2 className=" text-xl sm:text-2xl md:text-3xl lg:text-3xl font-bold mb-8 text-center text-lime-950 font-serif">
           Ofertas Especiales
