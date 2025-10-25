@@ -37,7 +37,6 @@ const initialState: AuthState = {
  };
 
 const authReducer = (state = initialState, action: AnyAction):  AuthState => {
-  console.log("action.type", action.type);
   switch (action.type) {
     case LOADING_START:
       return {

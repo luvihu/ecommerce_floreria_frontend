@@ -13,7 +13,7 @@ import logoFloreria from '../assets/logoMariposaT.png';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-gray-900 text-white relative" id='contactar'>
+    <footer className="bg-gray-900 text-white relative" id='contacto'>
       <div className="py-4 md:py-6 lg:py-8  border-b border-gray-800">
         <div className="container mx-auto px-4 sm:px-4 md:px-4 lg:px-6">
           <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-6 lg:gap-8">

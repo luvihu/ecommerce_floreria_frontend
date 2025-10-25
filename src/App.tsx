@@ -15,6 +15,7 @@ import ProductoManagement from './components/dashboard/ProductoManagement';
 import CategoriesManagement from './components/dashboard/CategoriesManagement';
 import PromotionsManagement from './components/dashboard/PromotionsManagement';
 import UsuarioManagement from './components/dashboard/UsuarioManagement';
+import WhatsAppButton from './components/WhatsAppButton';
 
 interface ProtectedRouteProps {
   roleRequired?: "ADMIN" | "USER";
@@ -55,41 +56,44 @@ function App() {
   && pathname !== '/admin/usuarios';
 
   return (
-    <main>
-      {showHeader && <Header />}
-      <Routes>
-        {/* Rutas públicas */}
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/product/:id" element={<ProductDetail />} />
-        
-        {/* Rutas protegidas (requieren autenticación) */}
-        <Route path="/user/profile" 
-        element={
-          <ProtectedRoute roleRequired="USER">
-            <Profile />
-          </ProtectedRoute>
-        } />
-        {/* Rutas protegidas (requieren rol de administrador) */}
-        <Route path="/admin/*" 
-            element={
-              <ProtectedRoute roleRequired="ADMIN">
-              <Dashboard />
-              </ProtectedRoute>
-            }>
-              <Route index element={<HomeDashboard/>} />
-              <Route path="productos" element={<ProductoManagement />} />
-              <Route path="categorias" element={<CategoriesManagement />} />
-              <Route path="promociones" element={<PromotionsManagement />} />
-              <Route path="usuarios" element={<UsuarioManagement />} />
-        </Route>
-                 
-        {/* Ruta para manejar URLs no encontradas */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-      {showFooter && <Footer />}
-    </main>
+    <div >
+      <main >
+        {showHeader && <Header />}
+        <Routes>
+          {/* Rutas públicas */}
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          
+          {/* Rutas protegidas (requieren autenticación) */}
+          <Route path="/user/profile" 
+          element={
+            <ProtectedRoute roleRequired="USER">
+              <Profile />
+            </ProtectedRoute>
+          } />
+          {/* Rutas protegidas (requieren rol de administrador) */}
+          <Route path="/admin/*" 
+              element={
+                <ProtectedRoute roleRequired="ADMIN">
+                <Dashboard />
+                </ProtectedRoute>
+              }>
+                <Route index element={<HomeDashboard/>} />
+                <Route path="productos" element={<ProductoManagement />} />
+                <Route path="categorias" element={<CategoriesManagement />} />
+                <Route path="promociones" element={<PromotionsManagement />} />
+                <Route path="usuarios" element={<UsuarioManagement />} />
+          </Route>
+                  
+          {/* Ruta para manejar URLs no encontradas */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+        {showFooter && <Footer />}
+        <WhatsAppButton />
+      </main>
+    </div>
   );
 }
 
