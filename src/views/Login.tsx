@@ -52,7 +52,7 @@ const Login = () => {
   });
 
   return (
-    <div className="mt-20 sm:mt-24 md:mt-28 lg:mt-28 py-10 flex flex-col relative overflow-hidden">
+    <div className="mt-10 sm:mt-14 md:mt-26 lg:mt-26 py-20 flex flex-col relative overflow-hidden bg-rose-50">
           
       {/* Contenedor principal centrado */}
       <div className="flex-grow flex items-center justify-center">
