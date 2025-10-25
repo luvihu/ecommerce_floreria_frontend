@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FaUser, FaBars, FaPhoneAlt, FaTimes} from "react-icons/fa";
 import { FiGift } from "react-icons/fi";
@@ -7,28 +7,14 @@ import logoFloreria from "../assets/logoMariposaT.png";
 import ProfileMenu from "./users/ProfileMenu";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-// import '../components/banner.css';
 
 const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const isAuthenticated = useSelector((state: RootState) => state.auth.user);
-
-   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Función para navegación inteligente
-  const handleNavigation = (targetId: string, e?: React.MouseEvent) => {
+  
+   const handleNavigation = (targetId: string, e?: React.MouseEvent) => {
     if (e) e.preventDefault();
     
     if (location.pathname === '/') {
@@ -51,7 +37,7 @@ const Header: React.FC = () => {
       if (productosSection) {
         productosSection.scrollIntoView({ behavior: "smooth" });
       }
-      window.history.replaceState(null, '', '/?action=showAllProducts#productos');
+      window.history.replaceState(null, '');
     } else {
       navigate('/?action=showAllProducts#productos');
     }
@@ -59,12 +45,15 @@ const Header: React.FC = () => {
   };
 
   const goToHome = () => {
+   if (location.pathname === "/") {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  } else {
     navigate("/");
-    setMobileMenuOpen(false);
+  }
+  setMobileMenuOpen(false);
   };
 
   const goLogin = () => {
-    // navigate("/login");
      window.open("/login", "_blank", "noopener,noreferrer");
     setMobileMenuOpen(false);
   };
@@ -83,11 +72,7 @@ const Header: React.FC = () => {
               <img
                 src={logoFloreria}
                 alt="Florería Estela"
-                className={`object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 ${
-                  isScrolled 
-                    ? 'h-12 sm:h-14 md:h-16 lg:h-16'  
-                    : 'h-16 sm:h-18 md:h-20 lg:h-24' 
-                }`}
+                className="object-contain transition-all duration-500 group-hover:scale-110 group-hover:rotate-3 h-16 sm:h-18 md:h-20 lg:h-24"
               />
               {/* Efecto de brillo */}
               <div className="absolute inset-0 bg-gradient-to-r from-lime-200/0 via-lime-100/30 to-lime-200/0 rounded-full blur-sm group-hover:blur-md transition-all duration-500 opacity-0 group-hover:opacity-100" />
@@ -98,79 +83,56 @@ const Header: React.FC = () => {
             {/* Inicio */}
             <button
               onClick={goToHome}
-              className={`flex items-center gap-2 text-lime-900 hover:text-lime-700 transition-all duration-300 group relative ${
-                isScrolled ? 'px-3 py-2' : 'px-4 py-3'
-              }`}
+              className="flex items-center gap-2 text-lime-900 hover:text-lime-700 transition-all duration-300 group relative px-4 py-3"
             >
               <div className="relative">
-                <IoMdHome className={`transition-all duration-300 group-hover:scale-110 ${
-                  isScrolled ? 'text-2xl' : 'md:text-xl lg:text-2xl'
-                }`} />
+                <IoMdHome className="transition-all duration-300 group-hover:scale-110 md:text-xl lg:text-2xl" />
                 <div className="absolute -inset-1 bg-lime-200/30 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
               </div>
-              <span className={`font-semibold transition-all duration-300 ${
-                isScrolled ? 'text-base' : 'text-base md:text-lg lg:text-xl'
-              }`}>Inicio</span>
+              <span className="font-semibold transition-all duration-300 text-base md:text-lg lg:text-xl">Inicio</span>
               {/* Línea decorativa */}
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lime-500 to-amber-400 group-hover:w-full transition-all duration-300" />
             </button>
             
             <button 
               onClick={handleProductsNavigation}
-              className={`flex items-center gap-2 text-lime-900 hover:text-lime-700 transition-all duration-300 group relative ${
-                isScrolled ? 'px-3 py-2' : 'px-4 py-3'
-              }`}
+              className="flex items-center gap-2 text-lime-900 hover:text-lime-700 transition-all duration-300 group relative px-4 py-3"
             >
               <div className="relative">
-                <FiGift className={`transition-all duration-300 group-hover:scale-110 ${
-                  isScrolled ? 'text-2xl' : 'md:text-xl lg:text-2xl'
-                }`} />
+                <FiGift className="transition-all duration-300 group-hover:scale-110 md:text-xl lg:text-2xl" />
                 <div className="absolute -inset-1 bg-amber-200/30 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
               </div>
-              <span className={`font-semibold transition-all duration-300 ${
-                isScrolled ? 'text-base' : 'text-base md:text-lg lg:text-xl'
-              }`}>Productos</span>
+              <span className="font-semibold transition-all duration-300 text-base md:text-lg lg:text-xl">Productos</span>
               <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-amber-500 to-lime-400 group-hover:w-full transition-all duration-300" />
             </button>
 
             {isAuthenticated ? (
-              <div className={`transition-all duration-300 ${
-                isScrolled ? 'scale-95' : 'scale-100'
-              }`}>
+              <div className="transition-all duration-300 scale-100">
                 <ProfileMenu />
               </div>
             ) : (
               <button
                 onClick={goLogin}
-                className={`flex items-center gap-2 text-lime-900 hover:text-lime-700 transition-all duration-300 group relative ${
-                  isScrolled ? 'px-3 py-2' : 'px-4 py-3'
-                }`}
+                className="flex items-center gap-2 text-lime-900 hover:text-lime-700 transition-all duration-300 group relative px-4 py-3"
               >
                 <div className="relative">
-                  <FaUser className={`transition-all duration-300 group-hover:scale-110 ${
-                    isScrolled ? 'text-xl' : 'md:text-xl lg:text-2xl'
-                  }`} />
+                  <FaUser className="transition-all duration-300 group-hover:scale-110 md:text-xl lg:text-2xl" />
                   <div className="absolute -inset-1 bg-lime-200/30 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300" />
                 </div>
-                <span className={`font-semibold transition-all duration-300 ${
-                  isScrolled ? 'text-base' : 'text-base md:text-lg lg:text-xl'
-                }`}>Mi cuenta</span>
+                <span className="font-semibold transition-all duration-300 text-base md:text-lg lg:text-xl">Mi cuenta</span>
                 <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-lime-500 to-amber-400 group-hover:w-full transition-all duration-300" />
               </button>
             )}
 
              <button
               onClick={(e) => handleNavigation('contacto', e)}
-              className={`flex items-center bg-gradient-to-r from-lime-600 to-lime-500 hover:from-lime-700 hover:to-lime-600 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden ${
-                isScrolled ? 'px-4 py-2.5' : 'px-4 py-2'
-              }`}
+              className="flex items-center px-4 py-2 bg-gradient-to-r from-lime-600 to-lime-500 hover:from-lime-700 hover:to-lime-600 
+                text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group relative overflow-hidden"
             >
               {/* Efecto de brillo */}
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent -skew-x-12 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
               <FaPhoneAlt className="relative z-10 mr-2 group-hover:animate-bounce" />
-              <span className={`font-bold relative z-10 transition-all duration-300 ${
-                isScrolled ? 'text-sm' : ' text-sm md:text-base'
-              }`}>Contacto</span>
+              <span className="font-bold relative z-10 transition-all duration-300 text-sm md:text-base">Contacto</span>
             </button>
           </div>
 
@@ -178,9 +140,7 @@ const Header: React.FC = () => {
           <div className="sm:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`text-lime-900 hover:text-lime-700 focus:outline-none transition-all duration-300 p-3 rounded-2xl hover:bg-lime-100/50 backdrop-blur-sm border border-lime-200/30 ${
-                isScrolled ? 'scale-95' : 'scale-100'
-              }`}
+              className="text-lime-900 hover:text-lime-700 focus:outline-none transition-all duration-300 p-3 rounded-2xl hover:bg-lime-100/50 backdrop-blur-sm border border-lime-200/30 scale-100"
             >
               {mobileMenuOpen ? (
                 <FaTimes className="h-6 w-3" />
